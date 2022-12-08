@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { MoralisProvider } from 'react-moralis';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -7,8 +8,10 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+  <MoralisProvider initializeOnMount={false}>
     <App />
-  </React.StrictMode>
+  </MoralisProvider>
+</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

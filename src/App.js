@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./components/Navbar";
+import "./App.css";
+import Body from "./components/Body";
+import ElectionPage from "./components/Campaign";
+import Vote from "./components/Vote";
+import {Routes,Route,BrowserRouter} from "react-router-dom";
 
-function App() {
+function App(){
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <BrowserRouter>
+    <Navbar/>
+          <Routes>
+            <Route path="/" element={<Body />} />
+            <Route path="/home" element={<Body />} />
+            <Route path="/election" element={<ElectionPage />} />
+            <Route path="/vote" element={<Vote />} />
+          </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
