@@ -1,13 +1,8 @@
-# Sample Hardhat Project
+# Decentralized Voting Application
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+It is a decentralized voting application based on the Polygon chain, it allows users to create a new election campaign and they can also vote in any of the ongoing campaign as well. Since it is built on Blockchain that means it is completely decentralized and there is no way the results can be tampered by any central authority.
 
-Try running some of the following tasks:
+The smart contract part is done using Solidity and Hardhat. The unit testing is done using Chai framework The contract is deployed to mumbai polygon newtork using Alchemy RPC URL. 
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+The frontend for the project is creacted using ReactJS.
+
