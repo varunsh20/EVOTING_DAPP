@@ -1,5 +1,6 @@
 import Election from '../artifacts/contracts/Election.sol/Election.json'
 import Voting from '../artifacts/contracts/Voting.sol/Voting.json'
+import {TailSpin} from 'react-loader-spinner';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState,useEffect} from 'react';
@@ -10,16 +11,16 @@ export default function Vote(){
 
     const [Contents,setContents] = useState([]);
     const [tme,setTme] = useState();
-    
+    const [loading,setLoading] = useState(true);
 
     useEffect(()=>{
         async function getStats(){
             const provider = new ethers.providers.JsonRpcProvider(
-                "https://polygon-mumbai.g.alchemy.com/v2/JEZz-SPTEFbus_Emy2QD5loqygY-i_7d"
+                process.env.REACT_APP_RPC_URL
             );
           
             const contract = new ethers.Contract(
-                "0xaBbB7183F00d661abd2a020f8338360CF081d092",
+                process.env.REACT_APP_ELECTION_ADDRESS,
                 Election.abi,
                 provider
             );
@@ -39,13 +40,20 @@ export default function Vote(){
               }
             });
             setContents(Content);
+            setLoading(false);
               
         }  
         getStats();
     },[])
     const Vote = async (ind,cand) => {
         try {
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          if(accounts.length==0){
+            toast.error("Please Connect Your Wallet", {
+                position: toast.POSITION.TOP_CENTER
+            });
+        }
+        else{
           const provider = new ethers.providers.Web3Provider(window.ethereum);
           const signer = provider.getSigner();
 
@@ -61,8 +69,6 @@ export default function Vote(){
 
         const len = await contract.s_electionId();  
         const add = await contract.Elections(len-(ind+1));
-        console.log(add);
-          
           const Vote_Contract = new ethers.Contract(
             add, 
             Voting.abi, 
@@ -71,12 +77,11 @@ export default function Vote(){
           const transaction = await Vote_Contract.vote(cand);
           await transaction.wait();
           toast.success("Voted Successfully!");
-
+        }
       } catch (error) {
-          console.log(error);
-          toast.warn("You have already voted on this campaign.");
-      }
-    
+          toast.warn("You have already Voted on this campaign.");
+        }
+        
       }
       
       const winners = async(ind) =>{
@@ -115,6 +120,9 @@ export default function Vote(){
                     <h2> <u>Cast Your Vote </u></h2>
                 </div>
                 <h4><u> (Note - You Can Only Vote Once On a Particular Campaign) </u></h4>
+                {loading? <div className="spinner">
+                <TailSpin height={60}></TailSpin>
+            </div>:
                 <table>
                     <thead>
                         <tr>
@@ -124,7 +132,6 @@ export default function Vote(){
                             <th>Vote</th>
                         </tr>
                     </thead>
-            
                     <tbody>
                         {Contents.map((e,index) =>{
                             return(
@@ -156,6 +163,7 @@ export default function Vote(){
                     }
                     </tbody>
                 </table>
+                }
                 <ToastContainer/>
             </div>
         );

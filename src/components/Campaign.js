@@ -42,9 +42,13 @@ export default function ElectionPage(){
             const providers = new ethers.providers.JsonRpcProvider(
                 process.env.REACT_APP_RPC_URL
             );
-
-
-            if(form.name === "") {
+            const accounts =  await window.ethereum.request({method:'eth_accounts'});
+            if(accounts.length==0){
+                toast.error("Please Connect Your Wallet", {
+                    position: toast.POSITION.TOP_CENTER
+                });
+            }
+            else if(form.name === "") {
                 toast.warn("Name Field Is Empty");
             } 
             else if(form.description === "" ) {
