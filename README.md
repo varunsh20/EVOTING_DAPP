@@ -6,5 +6,5 @@ The smart contract part is done using Solidity and Hardhat. The unit testing is 
 
 The frontend for the project is creacted using ReactJS.
 
-### Project Link - https://evotingdapp.netlify.app/ 
+### Dapp Link - https://evotingdapp.netlify.app/ 
 
