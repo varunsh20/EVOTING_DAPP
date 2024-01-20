@@ -10,7 +10,7 @@ Users can also take part in any of the ongoing campaign and cast their vote.
 ## Tech Stack
 
 - **Backend**: Solidity, JavaScript, Remix, Hardhat, Node.js, Alchemy and Metamask.
-- **Frontend**: Javascript and React.js.
+- **Frontend**: Javascript, CSS and React.js.
 - **Unit Testing**: Chai.
 
 ## Usage
