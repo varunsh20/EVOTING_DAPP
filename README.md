@@ -5,7 +5,7 @@
 It is a Decentralized Voting Application on the mumbai testnet that allows users to conduct completely fair and transparent election campaigns without any bad practices. 
 Users can also take part in any of the ongoing campaign and cast their vote. 
 
-## [View dApp](https://evotingdapp.netlify.app/)
+### [View dApp](https://evotingdapp.netlify.app/)
 
 
 ![image](https://github.com/varunsh20/EVOTING_DAPP/assets/62187533/2e08bcf6-bf68-4a36-b921-ee556fd354f9)
